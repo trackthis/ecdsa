@@ -1,4 +1,4 @@
-# error-reporting
+# ECDSA
 Simple to use ecdsa
 
 [![npm](https://img.shields.io/npm/v/trackthis-ecdsa.svg?style=flat-square)](https://npmjs.com/package/trackthis-ecdsa/)
