@@ -12,12 +12,15 @@ bob.kp.generate();
 charlie.kp.generate();
 
 // Display the keys
-console.log('Alice private:', alice.kp.getPrivate().toString('base64'));
-console.log('Alice public:', alice.kp.getPublic().toString('base64'));
-console.log('Bob private:', bob.kp.getPrivate().toString('base64'));
-console.log('Bob public:', bob.kp.getPublic().toString('base64'));
-console.log('Charlie private:', charlie.kp.getPrivate().toString('base64'));
-console.log('Charlie public:', charlie.kp.getPublic().toString('base64'));
+process.stdout.write( 'Alice private: ' + alice.kp.getPrivate().toString('base64') + '\n');
+process.stdout.write( 'Alice public: ' + alice.kp.getPublic().toString('base64') + '\n');
+process.stdout.write('\n');
+process.stdout.write( 'Bob private: ' + bob.kp.getPrivate().toString('base64') + '\n');
+process.stdout.write( 'Bob public: ' + bob.kp.getPublic().toString('base64') + '\n');
+process.stdout.write('\n');
+process.stdout.write( 'Charlie private: ' + charlie.kp.getPrivate().toString('base64') + '\n');
+process.stdout.write( 'Charlie public: ' + charlie.kp.getPublic().toString('base64') + '\n');
+process.stdout.write('\n');
 
 // Exchange public keys between Bob and Alice
 alice.kp.setPublic( bob.kp.getPublic(bob.kp.getPrivate()) );
@@ -32,6 +35,7 @@ var messageFromAlice     = "Hello Bob, this is Alice",
     signatureFromCharlie = charlie.sign(messageFromCharlie);
 
 // Verify a signature
-console.log("Alice's signature is", bob.verify( messageFromAlice, signatureFromAlice ) ? 'good' : 'bad');
-console.log("Bob's signature is", alice.verify( messageFromBob, signatureFromBob ) ? 'good' : 'bad');
-console.log("Charlie's signature is", alice.verify( messageFromCharlie, signatureFromCharlie ) ? 'good' : 'bad');
+
+process.stdout.write("Alice's signature is " + (bob.verify( messageFromAlice, signatureFromAlice ) ? 'good' : 'bad') + '\n' );
+process.stdout.write("Bob's signature is " + (alice.verify( messageFromBob, signatureFromBob ) ? 'good' : 'bad') + '\n' );
+process.stdout.write("Charlie's signature is " + (alice.verify( messageFromCharlie, signatureFromCharlie ) ? 'good' : 'bad') + '\n' );
