@@ -14,4 +14,3 @@ checks:
 filter:
   excluded_paths:
     - "*.min.js" # Don't analyze minified files
-    - "test/*.js"    # Don't analyze the tests
