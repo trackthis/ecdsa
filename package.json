@@ -2,7 +2,7 @@
   "name": "trackthis-ecdsa",
   "version": "0.0.1",
   "description": "Simple to use ecdsa",
-  "main": "index.js",
+  "main": "lib/ecdsa.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -11,5 +11,8 @@
     "url": "gh:trackthis/ecdsa"
   },
   "author": "Robin Bron <robin@finwo.nl>",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "elliptic": "^6.4.0"
+  }
 }
