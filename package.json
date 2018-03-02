@@ -1,6 +1,6 @@
 {
   "name": "trackthis-ecdsa",
-  "version": "1.0.1",
+  "version": "1.1.0",
   "description": "Simple to use ecdsa",
   "main": "lib/ecdsa.js",
   "scripts": {
