@@ -22,13 +22,13 @@ suite.timeout(60000);
 co(function* () {
   var scope = {};
 
-  suite.addTest(new Test('EC module is loading', function(done) {
+  suite.addTest(new Test('EC module is loading - secp256k1', function(done) {
     scope.EC = require('../lib/ecdsa');
     assert.equal(typeof scope.EC,'function');
     done();
   }));
 
-  suite.addTest(new Test('Loading secp256k1 parties', function(done) {
+  suite.addTest(new Test('Loading parties', function(done) {
     scope.alice   = new scope.EC('secp256k1');
     scope.bob     = new scope.EC('secp256k1');
     scope.charlie = new scope.EC('secp256k1');
