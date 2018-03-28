@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "gh:trackthis/ecdsa"
+    "url": "https://github.com/trackthis/ecdsa"
   },
   "author": "Robin Bron <robin@finwo.nl>",
   "license": "MIT",
