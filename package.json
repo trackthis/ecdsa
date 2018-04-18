@@ -1,6 +1,6 @@
 {
   "name": "trackthis-ecdsa",
-  "version": "2.2.0",
+  "version": "3.0.0",
   "description": "Simple to use ecdsa",
   "main": "lib/ecdsa.js",
   "scripts": {
@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "gh:trackthis/ecdsa"
+    "url": "https://github.com/trackthis/ecdsa"
   },
   "author": "Robin Bron <robin@finwo.nl>",
   "license": "MIT",
