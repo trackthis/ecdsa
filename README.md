@@ -1,12 +1,8 @@
 # ECDSA
-Simple to use ecdsa
 
-[![Codetree](https://codetree.com/images/managed-with-codetree.svg)](https://codetree.com/projects/gX1r)
+> Simple to use ecdsa
 
 [![npm](https://img.shields.io/npm/v/trackthis-ecdsa.svg?style=flat-square)](https://npmjs.com/package/trackthis-ecdsa/)
-[![Scrutinizer Build](https://img.shields.io/scrutinizer/build/g/trackthis/ecdsa.svg?style=flat-square)](https://scrutinizer-ci.com/g/trackthis/ecdsa/)
-[![Scrutinizer](https://img.shields.io/scrutinizer/g/trackthis/ecdsa.svg?style=flat-square)](https://scrutinizer-ci.com/g/trackthis/ecdsa/)
-[![Scrutinizer Coverage](https://img.shields.io/scrutinizer/coverage/g/trackthis/ecdsa.svg?style=flat-square)](https://scrutinizer-ci.com/g/trackthis/ecdsa/)
 [![npm](https://img.shields.io/npm/l/trackthis-ecdsa.svg?style=flat-square)](https://npmjs.com/package/trackthis-ecdsa/)
 
 ## Installation
