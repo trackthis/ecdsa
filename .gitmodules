@@ -1,0 +1,3 @@
+[submodule "lib/supercop"]
+	path = lib/supercop
+	url = https://github.com/orlp/ed25519
