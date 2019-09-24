@@ -1,64 +1,97 @@
-# ECDSA
+# trackthis-ecdsa
 
-> Simple to use ecdsa
+[orlp/ed25519](https://github.com/orlp/ed25519) patched and compiled using [dcodeio/webassembly](https://github.com/dcodeio/webassembly)
 
-[![npm](https://img.shields.io/npm/v/trackthis-ecdsa.svg?style=flat-square)](https://npmjs.com/package/trackthis-ecdsa/)
-[![npm](https://img.shields.io/npm/l/trackthis-ecdsa.svg?style=flat-square)](https://npmjs.com/package/trackthis-ecdsa/)
+## Install
 
-## Installation
-
-```bash
+```sh
 npm install --save trackthis-ecdsa
 ```
 
-## Usage
+## Examples
+
+### Signing and verifying data
 
 ```js
-// Load the module
-var EC = require('./lib/ecdsa');
+const lib     =       require('trackthis-ecdsa');
+const seed    =       lib.createSeed();
+const keypair = await lib.createKeyPair(seed);
+const msg     =       Buffer.from('hello there');
+const sig     = await keypair.sign(msg);
 
-// Use a certain curve (for example secp256k1)
-var alice   = new EC('secp256k1'),
-    bob     = new EC('secp256k1'),
-    charlie = new EC('secp256k1');
-
-// Generate fresh keypairs
-alice.kp.generate();
-bob.kp.generate();
-charlie.kp.generate();
-
-// Display the keys
-process.stdout.write( 'Alice private: ' + alice.kp.getPrivate().toString('base64') + '\n');
-process.stdout.write( 'Alice public: ' + alice.kp.getPublic().toString('base64') + '\n');
-process.stdout.write('\n');
-process.stdout.write( 'Bob private: ' + bob.kp.getPrivate().toString('base64') + '\n');
-process.stdout.write( 'Bob public: ' + bob.kp.getPublic().toString('base64') + '\n');
-process.stdout.write('\n');
-process.stdout.write( 'Charlie private: ' + charlie.kp.getPrivate().toString('base64') + '\n');
-process.stdout.write( 'Charlie public: ' + charlie.kp.getPublic().toString('base64') + '\n');
-process.stdout.write('\n');
-
-// Exchange public keys between Bob and Alice
-alice.kp.setPublic( bob.kp.getPublic(bob.kp.getPrivate()) );
-bob.kp.setPublic( alice.kp.getPublic(alice.kp.getPrivate()) );
-
-// Sign a message
-var messageFromAlice     = "Hello Bob, this is Alice",
-    messageFromBob       = "Hello Alice, this is Bob",
-    messageFromCharlie   = "Hello Alice, this is Bob",
-    signatureFromAlice   = alice.sign( messageFromAlice ),
-    signatureFromBob     = bob.sign(messageFromBob),
-    signatureFromCharlie = charlie.sign(messageFromCharlie);
-
-// Verify a signature
-
-process.stdout.write("Alice's signature is " + (bob.verify( messageFromAlice, signatureFromAlice ) ? 'good' : 'bad') + '\n' );
-process.stdout.write("Bob's signature is " + (alice.verify( messageFromBob, signatureFromBob ) ? 'good' : 'bad') + '\n' );
-process.stdout.write("Charlie's signature is " + (alice.verify( messageFromCharlie, signatureFromCharlie ) ? 'good' : 'bad') + '\n' );
+console.log(await keypair.verify(sig, msg)); // true
 ```
 
-## Contributing
+### Storing keypairs
 
-First, look at the [issues page](https://github.com/trackthis/ecdsa/issues) to ensure your issue isn't already known. If it's not, you can create a new issue with a detailed description of what happened & how to reproduce the unexpected behavior.
+```js
+const lib     =       require('trackthis-ecdsa');
+const fs      =       require('fs');
+const seed    =       lib.createSeed();
+const keypair = await lib.createKeyPair();
 
-If you decide to take on the challenge of fixing a known (or unknown) issue, you can do so by sending in a pull request from your own fork of the project. Once it has been tested (manually for now) and approved, it will be merged into the master branch of the repository.
+fs.writeFileSync('keys.json', JSON.stringify({
+  publicKey: keypair.publicKey.toString('base64'),
+  secretKey: keypair.secretKey.toString('base64'),
+});
+```
+
+### Loading keypairs
+
+```js
+const lib = require('trackthis-ecdsa');
+const fs  = require('fs');
+
+const base64keys = require('./keys.json');
+const keypair = lib.keyPairFrom({
+  publicKey: Buffer.from(base64keys.publicKey, 'base64'),
+  secretKey: Buffer.from(base64keys.secretKey, 'base64'),
+});
+```
+
+## API
+
+### lib.createSeed()
+
+Generates 32-byte seed using `Math.random`. Using a different random-generator
+which is cryptographically secure is strongly advised.
+
+### lib.keyPairFrom( data )
+
+Generates a keypair containing the `.sign` and `.verify` functions
+
+### lib.createKeyPair( seed )
+
+Generates a keypair from the provided 32-byte seed with the following
+properties:
+
+- arguments:
+  - `seed` - a 32-byte byffer
+- returns:
+  - `keypair.publicKey` - A 32-byte public key as a buffer
+  - `keypair.secretKey` - A 64-byte secret key as a buffer
+  - `keypair.sign`      - Function to sign a message using the keypair
+  - `keypair.verify`    - Function to verify a signature using the keypair
+
+### lib.sign( msg, publicKey, secretKey )
+
+Sign a message using the given keypair.
+
+- arguments:
+  - `msg`       - A buffer representing the message
+  - `publicKey` - A 32-byte public key as a buffer
+  - `secretKey` - A 64-byte secret key as a buffer
+- returns:
+  - `signature` - A 64-byte buffer
+
+### lib.verify( sig, msg, publicKey )
+
+TODO
+
+### keypair.sign( msg )
+
+TODO
+
+### keypair.verify( sig, msg )
+
+TODO

@@ -1,5 +1,7 @@
-.idea/
 node_modules/
-.nyc_output/
-coverage/
-test-output.txt
+.tern*
+package-lock.json
+*.o
+*.ll
+*.wasm
+*.wasm.js
