@@ -68,16 +68,10 @@ exports.createKeyPair = async function(seed) {
 };
 
 exports.sign = async function(message, keypair){
-  if ('string' === typeof keypair) keypair = Buffer.from(keypair, 'hex');
-  if (isBuffer(keypair)) keypair = exports.keyPairFrom({sec: keypair});
-  if ('string' === typeof message) message = Buffer.from(message);
-  const signature = keypair.sign(message);
+  const signature = ec.sign(message, keypair);
   return Buffer.from(signature.toHex(), 'hex');
 };
 
 exports.verify = async function(signature, message, keypair){
-  if ('string' === keypair) keypair = Buffer.from(keypair, 'hex');
-  if (isBuffer(keypair)) keypair = exports.keyPairFrom({pub: keypair});
-  if (isBuffer(signature)) signature = signature.toString('hex');
-  return keypair.verify(message, signature);
+  return ec.verify(message, signature, keypair);
 };
