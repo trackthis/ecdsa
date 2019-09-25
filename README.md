@@ -1,6 +1,6 @@
 # trackthis-ecdsa
 
-[orlp/ed25519](https://github.com/orlp/ed25519) patched and compiled using [dcodeio/webassembly](https://github.com/dcodeio/webassembly)
+ed25519 signature generation and verification
 
 ## Install
 
