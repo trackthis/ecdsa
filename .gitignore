@@ -1,7 +1,3 @@
 node_modules/
-.tern*
 package-lock.json
-*.o
-*.ll
-*.wasm
-*.wasm.js
+.eslintcache

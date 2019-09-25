@@ -1,7 +1,3 @@
-lib/
-patch/
 .editorconfig
 .eslint*
 package-lock.json
-*.o
-*.ll
