@@ -68,10 +68,12 @@ exports.createKeyPair = async function(seed) {
 };
 
 exports.sign = async function(message, keypair){
+  if ('string' === typeof message) message = Buffer.from(message);
   const signature = ec.sign(message, keypair);
   return Buffer.from(signature.toHex(), 'hex');
 };
 
 exports.verify = async function(signature, message, keypair){
+  if (isBuffer(signature)) signature = signature.toString('hex');
   return ec.verify(message, signature, keypair);
 };
