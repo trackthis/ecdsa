@@ -1,3 +1,5 @@
 .editorconfig
 .eslint*
 package-lock.json
+scripts/
+.gitmodules
