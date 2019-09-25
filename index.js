@@ -74,6 +74,8 @@ exports.sign = async function(message, keypair){
 };
 
 exports.verify = async function(signature, message, keypair){
+  if ('string' === keypair) keypair = Buffer.from(keypair, 'hex');
+  if (isBuffer(keypair)) keypair = exports.keyPairFrom({pub: keypair});
   if (!isBuffer(signature)) return false;
   signature = signature.toString('hex');
   return keypair.verify(message, signature);
