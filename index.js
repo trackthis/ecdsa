@@ -46,14 +46,14 @@ exports.keyPairFrom = function(data) {
 
   // Attempt from pre-built secret
   if ('string' === typeof secretKey) return ec.keyFromSecret(secretKey);
-  if (isBuffer(secretKey)) return ec.keyFromSecret(secretKey);
+  if (isBuffer(secretKey)) return ec.keyFromSecret([...secretKey]);
 
   // Given seed = attempt another full keypair
   if ('string' === typeof seed) return exports.createKeyPair(seed);
 
   // Attempt public-only key
   if ('string' === typeof publicKey) return ec.keyFromPublic(publicKey);
-  if (isBuffer(publicKey)) return ec.keyFromPublic(publicKey);
+  if (isBuffer(publicKey)) return ec.keyFromPublic([...publicKey]);
 
   // We failed
   return null;
